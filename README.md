@@ -1,260 +1,420 @@
-# Speed Camera Warning App 🚗📷
+# Crypto Trading Strategies
 
-[![Android](https://img.shields.io/badge/Android-7.0%2B-green.svg)](https://developer.android.com)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.21-blue.svg)](https://kotlinlang.org)
-[![License](https://img.shields.io/badge/License-AGPLv3%20%2F%20Commercial-blue.svg)](LICENSE.txt)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-AGPLv3-blue.svg)](LICENSE.txt)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Android 測速照相警示 App - 使用政府開放資料 API 即時提醒駕駛接近測速照相機位置
+一個功能完整的加密貨幣量化交易策略框架，支援多種技術指標、回測引擎和風險管理系統。
 
-## ✨ 功能特色
+## 特色功能
 
-- 🗺️ **即時位置追蹤** - 使用 GPS 持續監測你的位置和速度
-- 📍 **測速照相黑資料** - 整合政府開放平台自動同步全台測速照相黑
-- 🔔 **距離警示** - 接近測速照相時分級提醒（500m/300m/100m）
-- 🔊 **語音播報** - TTS 語音提醒，專心開車免看手機
-- 🏃 **背景執行** - 前景服務保持 App 在背景持續運作
-- 💾 **離線功能** - 本地資料庫儲存，無網路也可運作
-- ⚡ **效能優化** - 智慧定位頻率保存，簡省電量
+- **多策略支援**: 內建 RSI、MA、MACD 等常見技術指標策略
+- **回測引擎**: 基於 Backtrader 的專業級回測系統
+- **風險管理**: 完整的倉位管理、止損止盈機制
+- **交易所整合**: 透過 CCXT 支援超過 100+ 交易所
+- **實時監控**: Telegram 即時通知和警報系統
+- **數據視覺化**: 美觀的圖表和回測報告
+- **模組化設計**: 易於擴展和自定義策略
 
-## 📑 系統需求
-
-- Android 7.0 (API 24) 或更高版本
-- GPS 定位功能
-- 網路連線（首次同步資料時）
-- 儲存空間約 50MB
-
-## 🏗️ 技術架構
-
-### 核心技術棧
-
-- **Language**: Kotlin
-- **Architecture**: MVVM (Model-View-ViewModel)
-- **Dependency Injection**: Hilt
-- **Database**: Room
-- **Network**: Retrofit + OkHttp
-- **Async**: Kotlin Coroutines + Flow
-- **Location**: Google Play Services Location API
-- **Background**: Foreground Service + WorkManager
-
-### 主要依賴
-
-```gradle
-// Android Core
-androidx.core:core-ktx:1.12.0
-androidx.appcompat:appcompat:1.6.1
-androidx.lifecycle:lifecycle-runtime-ktx:2.7.0
-
-// UI
-androidx.constraintlayout:constraintlayout:2.1.4
-com.google.android.material:material:1.11.0
-
-// Dependency Injection
-com.google.dagger:hilt-android:2.48
-
-// Database
-androidx.room:room-runtime:2.6.1
-androidx.room:room-ktx:2.6.1
-
-// Network
-com.squareup.retrofit2:retrofit:2.9.0
-com.squareup.retrofit2:converter-gson:2.9.0
-
-// Location
-com.google.android.gms:play-services-location:21.1.0
-
-// Background Tasks
-androidx.work:work-runtime-ktx:2.9.0
-```
-
-## 📂 合規結構
-
-```
-app/src/main/java/com/example/speedcamerawarning/
-├── SpeedCameraApp.kt                    # Application 類別
-├── data/                                # 資料層
-│   ├── local/
-│   │   ├── database/
-│   │   │   └── AppDatabase.kt           # Room 資料庫
-│   │   ├── dao/
-│   │   │   └── SpeedCameraDao.kt       # 資料存取物件
-│   │   └── entity/
-│   │       └── SpeedCameraEntity.kt    # 資料庫實體
-│   ├── remote/
-│   │   ├── api/
-│   │   │   └── DataGovApi.kt           # API 介面定義
-│   │   └── model/
-│   │       └── SpeedCameraResponse.kt  # API 回應模型
-│   └── repository/
-│       └── SpeedCameraRepository.kt    # 資料倉庫
-├── domain/                              # 業務邏輯層
-│   ├── model/
-│   │   └── SpeedCamera.kt              # 領域模型
-│   └── usecase/
-│       ├── GetSpeedCamerasUseCase.kt   # 取得測速相機
-│       └── SyncDataUseCase.kt          # 同步資料
-├── presentation/                        # 展示層
-│   ├── main/
-│   │   ├── MainActivity.kt             # 主畫面
-│   │   └── MainViewModel.kt            # 主畫面 ViewModel
-│   └── service/
-│       └── LocationTrackingService.kt  # 位置追蹤服務
-└── di/                                  # 依賴注入
-    ├── AppModule.kt
-    ├── DatabaseModule.kt
-    └── NetworkModule.kt
-```
-
-## 🚀 快速開始
+## 快速開始
 
 ### 前置需求
 
-- Android Studio Hedgehog | 2023.1.1 或更新版本
-- JDK 17 或更高版本
-- Android SDK API 34
+- Python 3.8 或更高版本
+- pip 套件管理工具
+- 穩定的網路連接（用於 API 調用）
 
 ### 安裝步驟
 
-1. **Clone 專案**
+1. **克隆倉庫**
+
 ```bash
 git clone https://github.com/wenchung/crypto-trading-strategies.git
 cd crypto-trading-strategies
 ```
 
-2. **開啟專案**
-   - 使用 Android Studio 開啟專案資料夾
-   - 等待 Gradle 同步完成
+2. **創建虛擬環境**
 
-3. **設定 API Key**（如需要）
-   - 複製 `local.properties.template` 為 `local.properties`
-   - 填入必要的 API 金鑰
+```bash
+# 創建虛擬環境
+python -m venv venv
 
-4. **執行應用程式**
-   - 連接 Android 裝置或啟動模擬器
-   - 點擊 Run 按鈕
+# 啟動虛擬環境
+# Linux/macOS:
+source venv/bin/activate
 
-## 📱 使用說明
+# Windows:
+venv\Scripts\activate
+```
 
-1. **首次啟動**
-   - 授予定位權限
-   - 授予通知權限
-   - 等待測速照相資料同步完成
+3. **安裝依賴**
 
-2. **開始追蹤**
-   - 點擊「開始追蹤」按鈕
-   - App 會在背景持續監測你的位置
-   - 接近測速照相時會自動提醒
+```bash
+pip install -r requirements.txt
+```
 
-3. **設定調整**
-   - 調整警示距離
-   - 開啟/關閉語音播報
-   - 設定更新頻率
+4. **配置環境變數**
 
-## 🗺️ 資料來源
+```bash
+# 複製範例配置文件
+cp .env.example .env
 
-測速照相資料來自：
-- **政府資料開放平臺** - [固定式測速照相機座標資料](https://data.gov.tw/)
-- 資料更新頻率：每日自動同步
+# 編輯 .env 文件，添加您的 API 密鑰
+nano .env  # 或使用您喜歡的編輯器
+```
 
-## 📄 授權條款
+在 `.env` 文件中設定：
 
-本專案採用雙重授權模式：
+```bash
+# 交易所 API 設定
+EXCHANGE_API_KEY=your_api_key_here
+EXCHANGE_API_SECRET=your_api_secret_here
 
-### 開源使用 (AGPL v3)
-- 個人使用、學習、研究
-- 需遵守 AGPL v3 條款
-- 修改後的程式碼必須開源
+# Telegram 通知（可選）
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
 
-### 商業授權
-- 商業應用、企業內部使用
-- 不需開源修改的程式碼
-- 請聯繫作者獲取商業授權
+# 交易模式
+TRADING_MODE=testnet  # 或 production
+```
+
+5. **運行第一個回測**
+
+```bash
+# 執行範例策略回測
+python examples/backtest_example.py
+```
+
+### 五分鐘快速體驗
+
+```python
+# quick_start.py
+from strategies.rsi_strategy import RSIStrategy
+from backtest_engine import BacktestEngine
+import ccxt
+
+# 1. 初始化交易所
+exchange = ccxt.binance({
+    'enableRateLimit': True,
+})
+
+# 2. 創建策略
+strategy = RSIStrategy(
+    rsi_period=14,
+    overbought=70,
+    oversold=30
+)
+
+# 3. 運行回測
+engine = BacktestEngine(
+    strategy=strategy,
+    symbol='BTC/USDT',
+    timeframe='1h',
+    start_date='2023-01-01',
+    end_date='2023-12-31',
+    initial_capital=10000
+)
+
+# 4. 執行並查看結果
+results = engine.run()
+print(f"總收益: {results['total_return']:.2%}")
+print(f"夏普比率: {results['sharpe_ratio']:.2f}")
+print(f"最大回撤: {results['max_drawdown']:.2%}")
+
+# 5. 生成圖表
+engine.plot()
+```
+
+運行：
+
+```bash
+python quick_start.py
+```
+
+## 專案結構
+
+```
+crypto-trading-strategies/
+├── strategies/              # 交易策略
+│   ├── base.py             # 策略基礎類別
+│   ├── rsi_strategy.py     # RSI 策略
+│   ├── ma_crossover.py     # 均線交叉策略
+│   └── macd_strategy.py    # MACD 策略
+├── backtest_engine.py      # 回測引擎
+├── risk_manager.py         # 風險管理
+├── monitor_alerter.py      # 監控和警報
+├── config_settings.py      # 配置管理
+├── examples/               # 範例代碼
+│   ├── simple_strategy.py
+│   └── backtest_example.py
+├── docs/                   # 文檔
+│   ├── strategies.md
+│   └── deployment.md
+├── tests/                  # 測試
+├── requirements.txt        # Python 依賴
+├── BUILD.md               # 構建指南
+└── CONTRIBUTING.md        # 貢獻指南
+```
+
+## 核心功能
+
+### 1. 策略開發
+
+創建自定義策略非常簡單：
+
+```python
+from strategies.base import BaseStrategy
+
+class MyStrategy(BaseStrategy):
+    def __init__(self, param1, param2):
+        super().__init__()
+        self.param1 = param1
+        self.param2 = param2
+    
+    def generate_signal(self, data):
+        # 實現您的交易邏輯
+        if self.should_buy(data):
+            return 'BUY'
+        elif self.should_sell(data):
+            return 'SELL'
+        return 'HOLD'
+```
+
+### 2. 回測分析
+
+```python
+# 運行回測
+results = engine.run()
+
+# 查看詳細指標
+print(results['metrics'])
+# - 總收益率
+# - 年化收益率
+# - 夏普比率
+# - 最大回撤
+# - 勝率
+# - 盈虧比
+```
+
+### 3. 風險管理
+
+```python
+from risk_manager import RiskManager
+
+risk_mgr = RiskManager(
+    max_position_size=0.1,    # 單筆最大 10%
+    stop_loss_pct=0.02,       # 2% 止損
+    take_profit_pct=0.05,     # 5% 止盈
+    max_daily_loss=0.05       # 單日最大虧損 5%
+)
+```
+
+### 4. 實時監控
+
+```python
+from monitor_alerter import TelegramAlerter
+
+alerter = TelegramAlerter(
+    bot_token='YOUR_BOT_TOKEN',
+    chat_id='YOUR_CHAT_ID'
+)
+
+# 發送交易通知
+alerter.send_trade_alert(
+    symbol='BTC/USDT',
+    action='BUY',
+    price=50000,
+    quantity=0.1
+)
+```
+
+## 內建策略
+
+### RSI 策略
+- 基於相對強弱指標的超買超賣策略
+- 參數：RSI 週期、超買閾值、超賣閾值
+
+### 均線交叉策略
+- 快速和慢速移動平均線交叉
+- 參數：快線週期、慢線週期
+
+### MACD 策略
+- 基於 MACD 指標的趨勢追蹤
+- 參數：快線、慢線、訊號線週期
+
+### 布林帶策略
+- 價格突破布林帶上下軌
+- 參數：週期、標準差倍數
+
+更多策略請參見 [策略文檔](docs/strategies.md)
+
+## 配置說明
+
+### 策略配置
+
+在 `config/strategy_config.yaml` 中設定：
+
+```yaml
+strategy:
+  name: "RSI_Strategy"
+  timeframe: "1h"
+  
+  parameters:
+    rsi_period: 14
+    overbought: 70
+    oversold: 30
+  
+  risk_management:
+    max_position_size: 0.1
+    stop_loss_pct: 0.02
+    take_profit_pct: 0.05
+```
+
+### 交易對配置
+
+在 `config/pairs.yaml` 中設定：
+
+```yaml
+trading_pairs:
+  - BTC/USDT
+  - ETH/USDT
+  - BNB/USDT
+```
+
+## 測試
+
+運行測試套件：
+
+```bash
+# 運行所有測試
+pytest tests/
+
+# 運行特定測試
+pytest tests/test_strategies.py -v
+
+# 生成覆蓋率報告
+pytest --cov=strategies --cov-report=html
+```
+
+## 文檔
+
+- [構建指南](BUILD.md) - 詳細的安裝和設置說明
+- [貢獻指南](CONTRIBUTING.md) - 如何為專案做出貢獻
+- [策略開發](docs/strategies.md) - 策略開發指南
+- [API 文檔](docs/api.md) - API 參考文檔
+- [部署指南](docs/deployment.md) - 生產環境部署
+
+## 使用範例
+
+### 範例 1: 簡單回測
+
+```bash
+python examples/simple_backtest.py --symbol BTC/USDT --timeframe 1h
+```
+
+### 範例 2: 多策略比較
+
+```bash
+python examples/strategy_comparison.py
+```
+
+### 範例 3: 實時交易（模擬）
+
+```bash
+python examples/paper_trading.py --strategy rsi
+```
+
+## 效能優化
+
+- **並行處理**: 支援多進程回測多個交易對
+- **數據緩存**: 智能緩存歷史數據減少 API 調用
+- **增量更新**: 只更新最新的 K 線數據
+
+## 安全注意事項
+
+1. **永遠不要提交 API 密鑰**: 使用 `.env` 文件並加入 `.gitignore`
+2. **測試網路優先**: 在實盤前充分測試
+3. **小額測試**: 實盤時先用小額資金測試
+4. **監控和警報**: 設置止損和實時監控
+5. **定期檢查**: 定期檢查策略表現和資金狀況
+
+## 常見問題
+
+### Q: 如何添加新的交易所？
+
+A: CCXT 支援 100+ 交易所，只需在配置中修改交易所名稱即可。
+
+### Q: 可以實盤交易嗎？
+
+A: 可以，但請先在測試網路充分測試，並遵守風險管理原則。
+
+### Q: 如何獲取歷史數據？
+
+A: 框架會自動從交易所 API 獲取歷史數據並緩存。
+
+### Q: 支援哪些技術指標？
+
+A: 透過 `ta` 庫支援 100+ 技術指標，包括 RSI, MACD, BB, SMA, EMA 等。
+
+更多問題請查看 [FAQ](docs/FAQ.md)
+
+## 路線圖
+
+- [x] 基礎回測引擎
+- [x] 風險管理系統
+- [x] Telegram 通知
+- [ ] Web 儀表板
+- [ ] 機器學習策略
+- [ ] 多交易所套利
+- [ ] 實時風險監控
+- [ ] Docker 部署支援
+
+## 貢獻
+
+我們歡迎所有形式的貢獻！請閱讀 [貢獻指南](CONTRIBUTING.md) 了解詳情。
+
+### 貢獻者
+
+感謝所有為本專案做出貢獻的開發者！
+
+## 免責聲明
+
+**重要**: 本專案僅供教育和研究目的使用。
+
+- 作者不對任何交易損失負責
+- 加密貨幣交易涉及高風險
+- 過去的表現不代表未來結果
+- 請在充分理解風險後使用
+- 建議在投資前諮詢專業財務顧問
+
+**這不是財務建議。請自行承擔風險。**
+
+## 授權
+
+本專案採用雙重授權：
+
+- **AGPLv3** 用於開源使用
+- **商業授權** 可用於商業部署
 
 詳見 [LICENSE.txt](LICENSE.txt)
 
-## 🤝 貢獻
+## 聯繫方式
 
-歡迎提交 Issue 和 Pull Request！
-
-### 貢獻指南
-
-1. Fork 此專案
-2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
-
-## ⚠️ 免責聲明
-
-- 本 App 僅供輔助駕駛參考使用
-- 駕駛人仍需遵守交通規則，注意路況
-- 測速照相位置可能有誤差或延遲更新
-- 使用本 App 不代表可以超速或違規
-- 作者不對使用本 App 造成的任何後果負責
-
-## 📧 聯絡方式
-
-- **作者**: Chiu Wen Chung
+- **Issues**: [GitHub Issues](https://github.com/wenchung/crypto-trading-strategies/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/wenchung/crypto-trading-strategies/discussions)
 - **Email**: cwthome@gmail.com
-- **GitHub**: [@wenchung](https://github.com/wenchung)
 
-## 💖 支持此專案
+## 致謝
 
-如果這個專案對你有幫助，歡迎透過 GitHub Sponsors 支持開發工作！
+本專案使用了以下優秀的開源項目：
 
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-red?logo=github&style=for-the-badge)](https://github.com/sponsors/wenchung)
-
-### 贊助方案
-
-#### ☕ 咖啡贊助者 - $5/月
-- 在 README 中列出你的名字
-- 專案更新通知
-- 感謝你的支持！
-
-#### 🌟 銅級贊助者 - $10/月
-- 所有咖啡贊助者的權益
-- 在專案網站上展示你的頭像
-- 優先處理 Issue 回報
-
-#### 🚀 銀級贊助者 - $25/月
-- 所有銅級贊助者的權益
-- 在 README 中展示你的 Logo（附連結）
-- 每月專案進度報告
-- 功能建議優先考慮
-
-#### 💎 金級贊助者 - $50/月
-- 所有銀級贊助者的權益
-- 專屬技術諮詢（每月 1 小時）
-- 客製化功能開發討論
-- 特別感謝區展示
-
-#### 🏢 企業贊助 - $100+/月
-- 所有金級贊助者的權益
-- 商業授權諮詢
-- 企業級技術支援
-- 專案合作機會
-- 在所有文件中展示企業 Logo
-
-### 目前贊助者
-
-感謝以下贊助者的支持：
-
-<!-- sponsors -->
-_暫無贊助者，成為第一位支持者吧！_
-<!-- sponsors -->
-
-你的支持將用於：
-- ⚡ 持續開發和維護
-- 🐛 Bug 修復和效能優化
-- 📚 文件和教學改進
-- 🔐 安全性更新
-- 🎨 UI/UX 改進
-
-## 🙏 致謝
-
-- 政府資料開放平臺提供測速照相資料
-- Android 開發社群的各項開源專案
-- 所有貢獻者和使用者
+- [CCXT](https://github.com/ccxt/ccxt) - 加密貨幣交易所整合
+- [Backtrader](https://github.com/mementum/backtrader) - 回測框架
+- [TA-Lib](https://github.com/mrjbq7/ta-lib) - 技術分析指標
+- [Pandas](https://github.com/pandas-dev/pandas) - 數據處理
 
 ---
 
-Made with ❤️ in Taiwan 🇹🇼
+**Made with ❤️ by the open-source community**
+
+**Star ⭐ this repo if you find it useful!**
