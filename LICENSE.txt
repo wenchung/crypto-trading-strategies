@@ -1,0 +1,58 @@
+# Dual License
+
+This software is available under two licenses:
+
+## 1. GNU Affero General Public License v3.0 (AGPLv3)
+
+For open source projects, personal use, and educational purposes, this software is licensed under AGPLv3.
+
+Copyright (C) 2026 Chiu Wen Chung
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+**Network Use Requirement:** If you run a modified version of this software 
+on a server and let other users interact with it, you must provide them with 
+access to the modified source code.
+
+Full AGPLv3 license text: https://www.gnu.org/licenses/agpl-3.0.html
+
+## 2. Commercial License
+
+For proprietary or closed-source products, a commercial license is required.
+
+A commercial license grants you the right to use this software in proprietary 
+applications without the requirement to disclose your source code or comply 
+with AGPLv3 terms.
+
+**Contact for commercial licensing:**
+- Email: cwthome@gmail.com
+- Include: Project description, expected usage, and company details
+
+---
+
+## Which License Applies to You?
+
+- **Use AGPLv3** if:
+  - Your project is open source (GPL-compatible license)
+  - Personal/educational use
+  - You're willing to share modifications under AGPLv3
+
+- **Need Commercial License** if:
+  - Building proprietary/closed-source software
+  - Cannot comply with AGPLv3's source disclosure requirements
+  - Distributing as part of a commercial product without source code
+
+## Questions?
+
+Contact cwthome@gmail.com for licensing inquiries.
