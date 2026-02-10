@@ -1,0 +1,22 @@
+# Core dependencies
+ccxt>=4.0.0              # Cryptocurrency exchange integration
+pandas>=2.0.0            # Data manipulation
+numpy>=1.24.0            # Numerical computing
+ta>=0.11.0               # Technical analysis indicators
+
+# Backtesting
+backtrader>=1.9.78       # Backtesting framework
+
+# Monitoring & Logging
+python-telegram-bot>=20.0  # Telegram alerts (optional)
+requests>=2.31.0         # HTTP requests
+
+# Configuration
+python-dotenv>=1.0.0     # Environment variables
+
+# Data visualization (for analysis)
+matplotlib>=3.7.0        # Plotting
+plotly>=5.14.0           # Interactive charts
+
+# Utils
+pyyaml>=6.0              # YAML config support
