@@ -8,15 +8,15 @@ Android 測速照相警示 App - 使用政府開放資料 API 即時提醒駕駛
 
 ## ✨ 功能特色
 
-- 🗺️ **即時位置追蹤** - 使用 GPS 持續監控你的位置和速度
-- 📍 **測速照相點資料** - 從政府開放平台自動同步全台測速照相點
+- 🗺️ **即時位置追蹤** - 使用 GPS 持續監測你的位置和速度
+- 📍 **測速照相黑資料** - 整合政府開放平台自動同步全台測速照相黑
 - 🔔 **距離警示** - 接近測速照相時分級提醒（500m/300m/100m）
 - 🔊 **語音播報** - TTS 語音提醒，專心開車免看手機
-- 🏃 **背景執行** - 前景服務確保 App 在背景持續運作
+- 🏃 **背景執行** - 前景服務保持 App 在背景持續運作
 - 💾 **離線功能** - 本地資料庫儲存，無網路也可運作
-- ⚡ **效能優化** - 智慧定位更新頻率，節省電量
+- ⚡ **效能優化** - 智慧定位頻率保存，簡省電量
 
-## 📱 系統需求
+## 📑 系統需求
 
 - Android 7.0 (API 24) 或更高版本
 - GPS 定位功能
@@ -66,242 +66,195 @@ com.google.android.gms:play-services-location:21.1.0
 androidx.work:work-runtime-ktx:2.9.0
 ```
 
-## 📂 專案結構
+## 📂 合規結構
 
 ```
 app/src/main/java/com/example/speedcamerawarning/
-├── SpeedCameraApp.kt                 # Application 類別
-├── data/                              # 資料層
+├── SpeedCameraApp.kt                    # Application 類別
+├── data/                                # 資料層
 │   ├── local/
 │   │   ├── database/
-│   │   │   └── AppDatabase.kt        # Room 資料庫
+│   │   │   └── AppDatabase.kt           # Room 資料庫
 │   │   ├── dao/
-│   │   │   └── SpeedCameraDao.kt     # 資料存取物件
+│   │   │   └── SpeedCameraDao.kt       # 資料存取物件
 │   │   └── entity/
-│   │       └── SpeedCameraEntity.kt  # 資料庫實體
+│   │       └── SpeedCameraEntity.kt    # 資料庫實體
 │   ├── remote/
 │   │   ├── api/
-│   │   │   └── DataGovApi.kt         # API 介面定義
+│   │   │   └── DataGovApi.kt           # API 介面定義
 │   │   └── model/
-│   │       └── SpeedCameraResponse.kt # API 回應模型
+│   │       └── SpeedCameraResponse.kt  # API 回應模型
 │   └── repository/
-│       └── SpeedCameraRepository.kt  # 資料倉庫
-├── domain/                            # 領域層
-│   └── model/
-│       └── SpeedCamera.kt            # 領域模型
-├── presentation/                      # 呈現層
-│   └── main/
-│       ├── MainActivity.kt           # 主要 Activity
-│       └── MainViewModel.kt          # ViewModel
-├── service/                           # 服務層
-│   ├── LocationTrackingService.kt    # 位置追蹤前景服務
-│   └── NotificationHelper.kt         # 通知輔助類別
-└── util/                              # 工具類別
-    ├── Constants.kt                  # 常數定義
-    ├── DistanceCalculator.kt         # 距離計算
-    ├── LocationHelper.kt             # 位置輔助工具
-    └── PermissionHelper.kt           # 權限處理
+│       └── SpeedCameraRepository.kt    # 資料倉庫
+├── domain/                              # 業務邏輯層
+│   ├── model/
+│   │   └── SpeedCamera.kt              # 領域模型
+│   └── usecase/
+│       ├── GetSpeedCamerasUseCase.kt   # 取得測速相機
+│       └── SyncDataUseCase.kt          # 同步資料
+├── presentation/                        # 展示層
+│   ├── main/
+│   │   ├── MainActivity.kt             # 主畫面
+│   │   └── MainViewModel.kt            # 主畫面 ViewModel
+│   └── service/
+│       └── LocationTrackingService.kt  # 位置追蹤服務
+└── di/                                  # 依賴注入
+    ├── AppModule.kt
+    ├── DatabaseModule.kt
+    └── NetworkModule.kt
 ```
 
 ## 🚀 快速開始
 
 ### 前置需求
 
-1. [Android Studio](https://developer.android.com/studio) (最新穩定版)
-2. Android SDK 34
-3. Gradle 8.2+
+- Android Studio Hedgehog | 2023.1.1 或更新版本
+- JDK 17 或更高版本
+- Android SDK API 34
 
 ### 安裝步驟
 
 1. **Clone 專案**
-
 ```bash
-git clone https://github.com/wenchung/SpeedCameraWarning.git
-cd SpeedCameraWarning
+git clone https://github.com/wenchung/crypto-trading-strategies.git
+cd crypto-trading-strategies
 ```
 
-2. **用 Android Studio 開啟**
+2. **開啟專案**
+   - 使用 Android Studio 開啟專案資料夾
+   - 等待 Gradle 同步完成
 
-```
-File → Open → 選擇專案資料夾
-```
+3. **設定 API Key**（如需要）
+   - 複製 `local.properties.template` 為 `local.properties`
+   - 填入必要的 API 金鑰
 
-3. **Gradle 同步**
+4. **執行應用程式**
+   - 連接 Android 裝置或啟動模擬器
+   - 點擊 Run 按鈕
 
-等待 Android Studio 自動同步依賴（或點擊 "Sync Now"）
+## 📱 使用說明
 
-4. **連接裝置**
+1. **首次啟動**
+   - 授予定位權限
+   - 授予通知權限
+   - 等待測速照相資料同步完成
 
-- 實體裝置：啟用 USB 偵錯
-- 或使用 Android 模擬器 (API 24+)
+2. **開始追蹤**
+   - 點擊「開始追蹤」按鈕
+   - App 會在背景持續監測你的位置
+   - 接近測速照相時會自動提醒
 
-5. **執行 App**
+3. **設定調整**
+   - 調整警示距離
+   - 開啟/關閉語音播報
+   - 設定更新頻率
 
-點擊綠色播放按鈕或按 `Shift + F10`
+## 🗺️ 資料來源
 
-### 詳細執行指南
-
-完整的執行說明請參考 [RUN_INSTRUCTIONS.md](RUN_INSTRUCTIONS.md)
-
-## 🎯 使用方式
-
-### 首次使用
-
-1. **授予權限**
-   - 位置權限：選擇「一律允許」
-   - 通知權限：允許
-   - 前景服務權限：允許 (Android 14+)
-
-2. **同步資料**
-   - 點擊「同步測速照相資料」按鈕
-   - 等待資料下載完成（約 5-10 秒）
-
-3. **開始監控**
-   - 點擊「開始監控」按鈕
-   - 通知欄會顯示前景服務運作中
-
-### 日常使用
-
-- App 在背景持續監控位置
-- 接近測速照相時自動提醒
-- 可隨時停止監控以節省電力
-
-### 警示級別
-
-| 距離 | 警示類型 | 說明 |
-|------|---------|------|
-| 500m | 提醒通知 | 前方有測速照相 |
-| 300m | 重要提醒 | 注意速限 |
-| 100m | 警告 | 立即檢查速度 |
-
-## 📊 資料來源
-
-本 App 使用以下政府開放資料：
-
-- **資料集**: 固定式測速照相設備設置點一覽表
-- **提供機關**: 中華民國交通部
-- **資料格式**: JSON
-- **更新頻率**: 不定期更新
-
-資料欄位包含：
-- 縣市別、鄉鎮、村里
-- 設置地點、速限
-- 經緯度座標
-- 設置方向
-
-## 🔒 隱私權政策
-
-- ✅ 位置資料僅用於本地計算距離
-- ✅ 不會上傳或儲存軌跡記錄
-- ✅ 不會收集個人識別資訊
-- ✅ 測速照相資料來自公開政府資料
-
-## 🛠️ 開發指南
-
-### 建置 Debug APK
-
-```bash
-./gradlew assembleDebug
-# 輸出: app/build/outputs/apk/debug/app-debug.apk
-```
-
-### 建置 Release APK
-
-```bash
-./gradlew assembleRelease
-# 輸出: app/build/outputs/apk/release/app-release.apk
-```
-
-### 執行測試
-
-```bash
-# 單元測試
-./gradlew test
-
-# 整合測試
-./gradlew connectedAndroidTest
-```
-
-### 程式碼品質
-
-```bash
-# Lint 檢查
-./gradlew lint
-
-# 查看報告
-open app/build/reports/lint-results.html
-```
-
-## 🐛 已知問題
-
-- [ ] 部分地區測速照相點資料可能不完整
-- [ ] 模擬器上語音播報可能無效
-- [ ] 長時間使用會增加電量消耗
-
-## 🗺️ 未來規劃
-
-- [ ] 整合 Google Maps 顯示測速照相位置
-- [ ] 新增使用者自訂警示距離
-- [ ] 支援區間測速提醒
-- [ ] 新增駕駛統計與歷史記錄
-- [ ] 多語系支援（英文）
-- [ ] Wear OS 支援
-
-## 🤝 貢獻指南
-
-歡迎提交 Issue 或 Pull Request！
-
-1. Fork 本專案
-2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
-3. Commit 你的變更 (`git commit -m 'Add some AmazingFeature'`)
-4. Push 到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
+測速照相資料來自：
+- **政府資料開放平臺** - [固定式測速照相機座標資料](https://data.gov.tw/)
+- 資料更新頻率：每日自動同步
 
 ## 📄 授權條款
 
-本專案採用 **雙重授權（Dual License）**：
+本專案採用雙重授權模式：
 
-### 🆓 AGPLv3 授權
-適用於：
-- ✅ 開源專案（GPL 相容授權）
-- ✅ 個人使用
-- ✅ 教育用途
+### 開源使用 (AGPL v3)
+- 個人使用、學習、研究
+- 需遵守 AGPL v3 條款
+- 修改後的程式碼必須開源
 
-詳見 [LICENSE.txt](LICENSE.txt) 或 https://www.gnu.org/licenses/agpl-3.0.html
+### 商業授權
+- 商業應用、企業內部使用
+- 不需開源修改的程式碼
+- 請聯繫作者獲取商業授權
 
-### 💼 商業授權
-適用於：
-- 🏢 專有/閉源軟體
-- 🚫 無法遵守 AGPLv3 開源要求
-- 📦 作為商業產品的一部分分發
+詳見 [LICENSE.txt](LICENSE.txt)
 
-**商業授權諮詢**: cwthome@gmail.com
+## 🤝 貢獻
 
----
+歡迎提交 Issue 和 Pull Request！
 
-**選擇指南**：
-- 如果你的專案是開源的或個人使用 → 使用 AGPLv3
-- 如果你要開發閉源商業產品 → 需要商業授權
+### 貢獻指南
 
-## 👨‍💻 作者
+1. Fork 此專案
+2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 開啟 Pull Request
 
-**Chiu Wen Chung**
-- Email: cwthome@gmail.com
-- GitHub: [@wenchung](https://github.com/wenchung)
+## ⚠️ 免責聲明
+
+- 本 App 僅供輔助駕駛參考使用
+- 駕駛人仍需遵守交通規則，注意路況
+- 測速照相位置可能有誤差或延遲更新
+- 使用本 App 不代表可以超速或違規
+- 作者不對使用本 App 造成的任何後果負責
+
+## 📧 聯絡方式
+
+- **作者**: Chiu Wen Chung
+- **Email**: cwthome@gmail.com
+- **GitHub**: [@wenchung](https://github.com/wenchung)
+
+## 💖 支持此專案
+
+如果這個專案對你有幫助，歡迎透過 GitHub Sponsors 支持開發工作！
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-red?logo=github&style=for-the-badge)](https://github.com/sponsors/wenchung)
+
+### 贊助方案
+
+#### ☕ 咖啡贊助者 - $5/月
+- 在 README 中列出你的名字
+- 專案更新通知
+- 感謝你的支持！
+
+#### 🌟 銅級贊助者 - $10/月
+- 所有咖啡贊助者的權益
+- 在專案網站上展示你的頭像
+- 優先處理 Issue 回報
+
+#### 🚀 銀級贊助者 - $25/月
+- 所有銅級贊助者的權益
+- 在 README 中展示你的 Logo（附連結）
+- 每月專案進度報告
+- 功能建議優先考慮
+
+#### 💎 金級贊助者 - $50/月
+- 所有銀級贊助者的權益
+- 專屬技術諮詢（每月 1 小時）
+- 客製化功能開發討論
+- 特別感謝區展示
+
+#### 🏢 企業贊助 - $100+/月
+- 所有金級贊助者的權益
+- 商業授權諮詢
+- 企業級技術支援
+- 專案合作機會
+- 在所有文件中展示企業 Logo
+
+### 目前贊助者
+
+感謝以下贊助者的支持：
+
+<!-- sponsors -->
+_暫無贊助者，成為第一位支持者吧！_
+<!-- sponsors -->
+
+你的支持將用於：
+- ⚡ 持續開發和維護
+- 🐛 Bug 修復和效能優化
+- 📚 文件和教學改進
+- 🔐 安全性更新
+- 🎨 UI/UX 改進
 
 ## 🙏 致謝
 
-- 感謝交通部提供開放資料
-- 感謝 Android 開源社群的貢獻
-
-## 📞 聯絡方式
-
-如有問題或建議，歡迎：
-- 開啟 [GitHub Issue](https://github.com/wenchung/SpeedCameraWarning/issues)
-- Email: cwthome@gmail.com
+- 政府資料開放平臺提供測速照相資料
+- Android 開發社群的各項開源專案
+- 所有貢獻者和使用者
 
 ---
 
-⚠️ **免責聲明**: 本 App 僅供參考，駕駛時仍應遵守交通規則，注意路況標示。開發者不對使用本 App 導致的任何後果負責。
-
-🚗 **安全駕駛，一路平安！**
+Made with ❤️ in Taiwan 🇹🇼
